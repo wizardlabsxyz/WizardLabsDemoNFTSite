@@ -107,7 +107,6 @@ export default function Home() {
                     </DialogContentText>
                 </DialogContent>
             </Dialog>
-            <body>
                 <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" className="navigation w-nav"></div>
                 <div className="section cc-store-home-wrap">
                     <div className="intro-header">
@@ -222,8 +221,6 @@ export default function Home() {
                     }}>
                     MINT
                 </Button>}
-
-            </body>
         </div>
     );
 }
