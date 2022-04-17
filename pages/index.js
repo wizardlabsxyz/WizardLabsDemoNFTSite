@@ -114,9 +114,8 @@ export default function Home() {
                         <div className="intro-text">
                             <div className="heading-jumbo">Welcome to Wizard Labs</div>
                             <div className="paragraph-bigger cc-bigger-white-light">This is a demonstration of our mint website solution<br /></div>
-                            {!isConnected && <Button
-                                className='button w-inline-block'
-                                variant="contained"
+                            {!isConnected && <button
+                                className="button w-inline-block"
                                 onClick={() => {
                                     connect()
                                         .then(() => {
@@ -128,17 +127,16 @@ export default function Home() {
                                         });
                                 }}>
                                 Connect
-                            </Button>}
-                            {isConnected && <Button
-                                className='button w-inline-block'
-                                variant="contained"
+                            </button>}
+                            {isConnected && <button
+                                className="button w-inline-block"
                                 onClick={() => {
                                     mint().then(() => {
                                         console.log('minted');
                                     })
                                 }}>
-                                MINT
-                            </Button>}
+                                Mint
+                            </button>}
                         </div>
                         <div id="custom-bo"></div>
                     </div>
