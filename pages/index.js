@@ -137,6 +137,7 @@ export default function Home() {
                                 }}>
                                 Mint
                             </button>}
+                            <a href='https://testnets.opensea.io/collection/wizardlabsdemonft' className='collection-link'>View the Collection</a>
                         </div>
                         <div id="custom-bo"></div>
                     </div>
@@ -174,10 +175,10 @@ export default function Home() {
                     <div className="cta-wrap">
                         <div>
                             <div className="cta-text">
-                                <div className="heading-jumbo-small">Grow your business.<br /></div>
-                                <div className="paragraph-bigger cc-bigger-light">Today is the day to build the business of your dreams. Share your mission with the world — and blow your customers away.<br /></div>
+                                <div className="heading-jumbo-small">Deploy your NFT Project with confidence.<br /></div>
+                                <div className="paragraph-bigger cc-bigger-light">Today is the day to build the project of your dreams. Share your mission with the world — and blow your community away.<br /></div>
                             </div>
-                            <a href="#" className="button cc-jumbo-button w-inline-block">
+                            <a href="https://twitter.com/eth_wizard" className="button cc-jumbo-button w-inline-block">
                                 <div>Start Now</div>
                             </a>
                         </div>

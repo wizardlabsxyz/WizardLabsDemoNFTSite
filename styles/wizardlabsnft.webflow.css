@@ -197,6 +197,15 @@ figcaption {
   opacity: 0.6;
 }
 
+.collection-link {
+  margin-top: 20px;
+  color: white;
+}
+
+.collection-link:hover {
+  color: #b33232;
+}
+
 .button {
   padding: 12px 25px;
   border-radius: 0px;
