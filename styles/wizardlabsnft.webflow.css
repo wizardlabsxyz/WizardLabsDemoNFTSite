@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-
 .w-layout-grid {
   display: -ms-grid;
   display: grid;
@@ -1614,6 +1613,10 @@ figcaption {
 
   ._404-wrap {
     padding: 30px;
+  }
+
+  .svg3 {
+    background-image: url('../images/placeholder-3.svg');
   }
 }
 
