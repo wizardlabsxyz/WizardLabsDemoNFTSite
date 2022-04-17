@@ -200,7 +200,7 @@ figcaption {
 .button {
   padding: 12px 25px;
   border-radius: 0px;
-  background-color: #1a1b1f;
+  background-color: #b33232;
   -webkit-transition: background-color 400ms ease, opacity 400ms ease, color 400ms ease;
   transition: background-color 400ms ease, opacity 400ms ease, color 400ms ease;
   color: #fff;
@@ -707,6 +707,50 @@ figcaption {
 
 .text-field:focus {
   border-color: #43464d;
+}
+
+.placeholder-1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 400px;
+  margin-bottom: 100px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #f4f4f4;
+  background-position: 0px 0px;
+  background-size: cover;
+  color: #fff;
+  background-image: url("../images/placeholder-1.svg");
+}
+
+.placeholder-3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 400px;
+  margin-bottom: 100px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #f4f4f4;
+  background-position: 0px 0px;
+  background-size: cover;
+  color: #fff;
+  background-image: url("../images/placeholder-3.svg");
 }
 
 .text-field::-webkit-input-placeholder {

@@ -144,7 +144,7 @@ export default function Home() {
                 <div className="container">
                     <div className="motto-wrap">
                         <div className="label cc-light">What we believe in</div>
-                        <div className="heading-jumbo-small">Grow your business, establish your brand, and put your customers first.<br /></div>
+                        <div className="heading-jumbo-small">Building the best possible mint experience for your community<br /></div>
                     </div>
                     <div className="divider"></div>
                     <div className="home-content-wrap">
@@ -155,10 +155,7 @@ export default function Home() {
                                     <h2 className="section-heading">Who we are</h2>
                                     <p className="paragraph-light">Nulla vel sodales tellus, quis condimentum enim. Nunc porttitor venenatis feugiat. Etiam quis faucibus erat, non accumsan leo. Aliquam erat volutpat. Vestibulum ac faucibus eros. Cras ullamcorper gravida tellus ut consequat.</p>
                                 </div>
-                                <a href="/about" className="button w-inline-block">
-                                    <div>Learn More</div>
-                                </a>
-                            </div><img src="../images/placeholder-3.svg" id="w-node-_86e64837-0616-515b-4568-76c147234d3f-8257984c" alt="" />
+                            </div><div className='placeholder-3'/>
                         </div>
                         <div className="w-layout-grid about-grid cc-about-2">
                             <div id="w-node-_86e64837-0616-515b-4568-76c147234d41-8257984c">
@@ -167,30 +164,7 @@ export default function Home() {
                                     <h2 className="section-heading">What we do</h2>
                                     <p className="paragraph-light">Nulla vel sodales tellus, quis condimentum enim. Nunc porttitor venenatis feugiat. Etiam quis faucibus erat, non accumsan leo. Aliquam erat volutpat. Vestibulum ac faucibus eros. Cras ullamcorper gravida tellus ut consequat.</p>
                                 </div>
-                                <a href="/team" className="button w-inline-block">
-                                    <div>Learn More</div>
-                                </a>
-                            </div><img />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="section">
-                <div className="container">
-                    <div className="blog-heading">
-                        <div className="label cc-light">About Us</div>
-                        <h2 className="work-heading">Company news</h2>
-                    </div>
-                    <div className="collection-list-wrapper w-dyn-list">
-                        <div role="list" className="collection-wrap w-dyn-items">
-                            <div role="listitem" className="blog-preview-wrap w-dyn-item">
-                                <a href="#" className="business-article-heading"></a>
-                                <div className="label cc-blog-date"></div>
-                                <p className="paragraph-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.</p>
-                            </div>
-                        </div>
-                        <div className="status-message cc-no-data w-dyn-empty">
-                            <div>No items found.</div>
+                            </div><div className='placeholder-1'/>
                         </div>
                     </div>
                 </div>
@@ -207,15 +181,6 @@ export default function Home() {
                                 <div>Start Now</div>
                             </a>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div className="section">
-                <div className="container">
-                    <div className="footer-wrap">
-                        <a href="https://webflow.com/" target="_blank" className="webflow-link w-inline-block"><img src="images/webflow-w-small2x_1webflow-w-small2x.png" width="15" alt="" className="webflow-logo-tiny" />
-                            <div className="paragraph-tiny">Powered by Webflow</div>
-                        </a>
                     </div>
                 </div>
             </div>

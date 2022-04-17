@@ -4,10 +4,10 @@ import '@styles/wizardlabsnft.webflow.css'
 
 function Application({ Component, pageProps }) {
     return (
-            <body>
+            <main>
                 <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
                 <Component {...pageProps} />
-            </body>
+            </main>
     );
 }
 
