@@ -1,13 +1,10 @@
 import _ from 'lodash';
 
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-
 import { ethers } from "ethers";
 import { useEffect, useState } from 'react';
+
+import MetamaskErrorDialog from '../components/MetamaskErrorDialog.js';
+import NetworkErrorDialog from '../components/NetworkErrorDialog.js';
 
 export default function Home() {
 
@@ -20,7 +17,8 @@ export default function Home() {
     const [signer, setSigner] = useState(undefined);
     const [signerAddress, setSignerAddress] = useState(undefined);
     const [isConnected, setConnected] = useState(false);
-    const [openDialog, setOpenDialog] = useState(false);
+    const [openMetamaskDialog, setOpenMetamaskDialog] = useState(false);
+    const [openNetworkDialog, setOpenNetworkDialog] = useState(false);
 
     useEffect(() => {
         try {
@@ -30,11 +28,12 @@ export default function Home() {
             provider.getNetwork().then((network) => {
                 if (!SUPPORTED_NETWORKS.includes(network.name)) {
                     console.log('detected unsupported network');
+                    setOpenNetworkDialog(true);
                 }
             });
         } catch (error) {
             console.log('provider not found');
-            setOpenDialog(true);
+            setOpenMetamaskDialog(true);
         }
     }, [])
 
@@ -91,22 +90,9 @@ export default function Home() {
 
     return (
         <div>
-            <Dialog
-                open={openDialog}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description">
-                <DialogTitle id="alert-dialog-title">
-                    {"Metamask Extension not Detected!"}
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        We couldn't find metamask in your browser.
-                        <br /><br />
-                        <a href="https://metamask.zendesk.com/hc/en-us">Metamask Support</a>
+            <MetamaskErrorDialog openDialog={openMetamaskDialog}/>
+            <NetworkErrorDialog openDialog={openNetworkDialog}/>
 
-                    </DialogContentText>
-                </DialogContent>
-            </Dialog>
             <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" className="navigation w-nav"></div>
             <div className="section cc-store-home-wrap">
                 <div className="intro-header">
@@ -137,7 +123,10 @@ export default function Home() {
                                 }}>
                                 Mint
                             </button>}
-                            <a href='https://testnets.opensea.io/collection/wizardlabsdemonft' className='collection-link'>View the Collection</a>
+                        </div>
+                        <div className='link-section'>
+                                <a href='https://testnets.opensea.io/collection/wizardlabsdemonft' target="_blank" className='collection-link'>View the Collection</a>
+                                <a href='https://rinkebyfaucet.com/' target="_blank" className='collection-link'>Click here to get ETH on Rinkeby TestNet</a>
                         </div>
                         <div id="custom-bo"></div>
                     </div>
@@ -154,7 +143,7 @@ export default function Home() {
                                 <div className="home-section-wrap">
                                     <div className="label cc-light">About</div>
                                     <h2 className="section-heading">Who we are</h2>
-                                    <p className="paragraph-light">Nulla vel sodales tellus, quis condimentum enim. Nunc porttitor venenatis feugiat. Etiam quis faucibus erat, non accumsan leo. Aliquam erat volutpat. Vestibulum ac faucibus eros. Cras ullamcorper gravida tellus ut consequat.</p>
+                                    <p className="paragraph-light">Experienced devleopers with a perfectionest mindest. We build solutions that put your worries to rest so you can focus on your community while we handle the technical details.</p>
                                 </div>
                             </div><div className='placeholder-3'/>
                         </div>
@@ -163,7 +152,7 @@ export default function Home() {
                                 <div className="home-section-wrap">
                                     <div className="label cc-light">Team</div>
                                     <h2 className="section-heading">What we do</h2>
-                                    <p className="paragraph-light">Nulla vel sodales tellus, quis condimentum enim. Nunc porttitor venenatis feugiat. Etiam quis faucibus erat, non accumsan leo. Aliquam erat volutpat. Vestibulum ac faucibus eros. Cras ullamcorper gravida tellus ut consequat.</p>
+                                    <p className="paragraph-light">Web3 Everything. From ERC20 tokens to ERC721 and ERC1155, to Defi staking applications. We will take your Dapp experience to the next level and your community members are going to love every second of it. </p>
                                 </div>
                             </div><div className='placeholder-1'/>
                         </div>
@@ -175,8 +164,8 @@ export default function Home() {
                     <div className="cta-wrap">
                         <div>
                             <div className="cta-text">
-                                <div className="heading-jumbo-small">Deploy your NFT Project with confidence.<br /></div>
-                                <div className="paragraph-bigger cc-bigger-light">Today is the day to build the project of your dreams. Share your mission with the world — and blow your community away.<br /></div>
+                                <div className="heading-jumbo-small">Deploy your Projects with confidence.<br /></div>
+                                <div className="paragraph-bigger cc-bigger-light">Today is the day to build the project of your dreams. <br/> Share your mission with the world — and blow your community away.<br /></div>
                             </div>
                             <a href="https://twitter.com/eth_wizard" className="button cc-jumbo-button w-inline-block">
                                 <div>Start Now</div>

@@ -1,6 +1,7 @@
 import '@styles/normalize.css'
 import '@styles/webflow.css'
 import '@styles/wizardlabsnft.webflow.css'
+import '@styles/local.css'
 
 function Application({ Component, pageProps }) {
     return (
