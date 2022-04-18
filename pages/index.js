@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import MetamaskErrorDialog from '../components/MetamaskErrorDialog.js';
 import NetworkErrorDialog from '../components/NetworkErrorDialog.js';
+import FailedMintDialog from '../components/FailedMintDialog.js';
 
 export default function Home() {
 
@@ -19,6 +20,7 @@ export default function Home() {
     const [isConnected, setConnected] = useState(false);
     const [openMetamaskDialog, setOpenMetamaskDialog] = useState(false);
     const [openNetworkDialog, setOpenNetworkDialog] = useState(false);
+    const [openFailedMintDialog, setOpenFailedMintDialog ] = useState(false);
 
     useEffect(() => {
         try {
@@ -81,17 +83,23 @@ export default function Home() {
         console.log('minting');
         const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, signer);
 
-        await contract.connect(signer).mint(
-            signerAddress,
-            1,
-            { value: ethers.utils.parseEther(".05") }
-        );
+        try {
+            await contract.connect(signer).mint(
+                signerAddress,
+                1,
+                { value: ethers.utils.parseEther(".05") }
+            );
+        } catch(error) {
+            setOpenFailedMintDialog(true);
+            throw error;
+        }
     }
 
     return (
         <div>
             <MetamaskErrorDialog openDialog={openMetamaskDialog}/>
             <NetworkErrorDialog openDialog={openNetworkDialog}/>
+            <FailedMintDialog openDialog={openFailedMintDialog} setOpenDialog={setOpenFailedMintDialog}/>
 
             <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" className="navigation w-nav"></div>
             <div className="section cc-store-home-wrap">
@@ -117,9 +125,13 @@ export default function Home() {
                             {isConnected && <button
                                 className="button w-inline-block"
                                 onClick={() => {
-                                    mint().then(() => {
+                                    mint()
+                                    .then(() => {
                                         console.log('minted');
                                     })
+                                    .catch((error) => {
+                                        console.log('failed to mint: ' + error);
+                                    });
                                 }}>
                                 Mint
                             </button>}
