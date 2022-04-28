@@ -1075,10 +1075,10 @@ a {
   display: -ms-flexbox;
   display: flex;
   height: 3.25rem;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
   border-top: 1px solid #1c1c22;
 }
 
@@ -1135,7 +1135,6 @@ a {
 .page-wrapper {
   position: relative;
   overflow: hidden;
-  height: auto;
 }
 
 .bordered-container {
@@ -1369,10 +1368,6 @@ a {
   .investor-grid.contained {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
-  }
-
-  .page-wrapper {
-    height: auto;
   }
 }
 
