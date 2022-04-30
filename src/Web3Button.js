@@ -5,8 +5,9 @@ import { ethers } from "ethers";
 
 import MetamaskErrorDialog from './MetamaskErrorDialog.js';
 import NetworkErrorDialog from './NetworkErrorDialog.js';
-import { func } from 'prop-types';
+import FailedMintDialog from './FailedMintDialog.js';
 
+test
 
 function Web3Button() {
 
@@ -22,12 +23,30 @@ function Web3Button() {
     const [networkSupported, setNetworkSupported] = useState(undefined);
     const [openMetamaskDialog, setOpenMetamaskDialog] = useState(false);
     const [openNetworkDialog, setOpenNetworkDialog] = useState(false);
+    const [openFailedMintDialog, setOpenFailedMintDialog] = useState(false);
 
+    // Check for provider and set signer if available
     useEffect(() => {
         try {
             const provider = new ethers.providers.Web3Provider(window.ethereum)
             setProvider(provider);
 
+            const signer = provider.getSigner();
+            signer.getAddress().then((address) => {
+                setSigner(signer);
+                setSignerAddress(address);
+                setConnected(true);
+
+                console.log('connected - signer set - ' + address);
+            });
+        } catch (error) {
+            console.log('provider or signer not found: ' + error);
+        }
+    }, [isConnected])
+
+    // Check current network
+    useEffect(() => {
+        if (provider) {
             provider.getNetwork().then((network) => {
                 if (!SUPPORTED_NETWORKS.includes(network.name)) {
                     console.log('detected unsupported network');
@@ -37,41 +56,24 @@ function Web3Button() {
                     setNetworkSupported(true);
                 }
             });
-        } catch (error) {
-            console.log('provider not found');
         }
-    }, [])
+    }, [provider])
 
     useEffect(() => {
         if (window.ethereum) {
 
-            window.ethereum.request({ method: 'eth_accounts' })
-                .then((accounts) => {
-                    if (!_.isEmpty(accounts)) {
-                        console.log('wallet is connected');
-                        setConnected(true);
-                    }
-                }).catch((error) => {
-                    console.log('error requesting accounts: ' + error);
-                });
-
             async function listenMMAccount() {
-                window.ethereum.on("accountsChanged", async function (accounts) {
-                    console.log('accounts changed');
-                    if (_.isEmpty(accounts)) {
-                        reset();
-                    } else {
-                        setConnected(true);
-                    }
+                window.ethereum.on("accountsChanged", async function () {
+                    window.location.reload();
                 });
             }
 
             async function listenMMNetwork() {
                 window.ethereum.on("chainChanged", async function () {
-                    console.log('chain changed');
                     window.location.reload();
                 });
             }
+
             listenMMAccount();
             listenMMNetwork();
         }
@@ -98,6 +100,24 @@ function Web3Button() {
         setSignerAddress(signerAddress);
     }
 
+    async function mint() {
+        console.log('attempting mint for: ' + signerAddress);
+
+        try {
+            const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, signer);
+
+            await contract.connect(signer).mint(
+                signerAddress,
+                1,
+                { value: ethers.utils.parseEther(".05") }
+            );
+        } catch (error) {
+            console.log('failed to connect for mint: ' + error);
+            setOpenFailedMintDialog(true);
+            throw error;
+        }
+    }
+
     function reset() {
         setSigner(undefined);
         setSignerAddress(undefined);
@@ -108,6 +128,7 @@ function Web3Button() {
         <>
             <NetworkErrorDialog openDialog={openNetworkDialog} setOpenDialog={setOpenNetworkDialog} />
             <MetamaskErrorDialog openDialog={openMetamaskDialog} setOpenDialog={setOpenMetamaskDialog} />
+            <FailedMintDialog openDialog={openFailedMintDialog} setOpenDialog={setOpenFailedMintDialog} />
 
             {!isConnected && <div
                 onClick={() => {
