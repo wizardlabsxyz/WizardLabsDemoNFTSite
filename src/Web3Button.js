@@ -7,8 +7,6 @@ import MetamaskErrorDialog from './MetamaskErrorDialog.js';
 import NetworkErrorDialog from './NetworkErrorDialog.js';
 import FailedMintDialog from './FailedMintDialog.js';
 
-test
-
 function Web3Button() {
 
     const SUPPORTED_NETWORKS = ['rinkeby'];
