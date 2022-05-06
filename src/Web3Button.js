@@ -40,7 +40,7 @@ function Web3Button() {
         } catch (error) {
             console.log('provider or signer not found: ' + error);
         }
-    }, [isConnected])
+    }, [])
 
     // Check current network
     useEffect(() => {
