@@ -76,7 +76,7 @@ function Web3Button() {
             async function listenMMNetwork() {
                 window.ethereum.on("chainChanged", () => {
                     console.log('chain changed');
-                    // window.location.reload();
+                    window.location.reload();
                 });
             }
 
