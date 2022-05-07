@@ -17,6 +17,7 @@ function Web3Button() {
     const [provider, setProvider] = useState(undefined);
     const [signer, setSigner] = useState(undefined);
     const [signerAddress, setSignerAddress] = useState(undefined);
+    const [accounts, setAccounts] = useState(undefined);
     const [isConnected, setConnected] = useState(false);
     const [networkSupported, setNetworkSupported] = useState(undefined);
     const [openMetamaskDialog, setOpenMetamaskDialog] = useState(false);
@@ -26,21 +27,23 @@ function Web3Button() {
     // Check for provider and set signer if available
     useEffect(() => {
         try {
-            const provider = new ethers.providers.Web3Provider(window.ethereum)
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
             setProvider(provider);
 
             const signer = provider.getSigner();
-            signer.getAddress().then((address) => {
-                setSigner(signer);
-                setSignerAddress(address);
-                setConnected(true);
-
-                console.log('connected - signer set - ' + address);
-            });
+            signer.getAddress()
+                .then((address) => {
+                    setSigner(signer);
+                    setSignerAddress(address);
+                    setConnected(true);
+                    console.log('connected - signer set - ' + address);
+                }).catch((error) => {
+                    console.log('signer is not connected: ' + error);
+                });
         } catch (error) {
-            console.log('provider or signer not found: ' + error);
+            console.log('provider not found: ' + error);
         }
-    }, [])
+    }, [accounts])
 
     // Check current network
     useEffect(() => {
@@ -61,14 +64,19 @@ function Web3Button() {
         if (window.ethereum) {
 
             async function listenMMAccount() {
-                window.ethereum.on("accountsChanged", async function () {
-                    window.location.reload();
+                window.ethereum.on("accountsChanged", (accounts) => {
+                    if (_.isNull(accounts) || _.isEmpty(accounts)) {
+                        reset();
+                    } else {
+                        setAccounts(accounts);
+                    }
                 });
             }
 
             async function listenMMNetwork() {
-                window.ethereum.on("chainChanged", async function () {
-                    window.location.reload();
+                window.ethereum.on("chainChanged", () => {
+                    console.log('chain changed');
+                    // window.location.reload();
                 });
             }
 
@@ -110,7 +118,6 @@ function Web3Button() {
                 { value: ethers.utils.parseEther(".05") }
             );
         } catch (error) {
-            console.log('failed to connect for mint: ' + error);
             setOpenFailedMintDialog(true);
             throw error;
         }
@@ -120,6 +127,7 @@ function Web3Button() {
         setSigner(undefined);
         setSignerAddress(undefined);
         setConnected(false);
+        setAccounts(undefined);
     }
 
     return (
@@ -140,7 +148,7 @@ function Web3Button() {
                                 console.log('connected');
                                 setConnected(true);
                             }).catch((error) => {
-                                console.log('failed to connect: ' + error);
+                                console.log('failed to connect');
                             });
                     }
                 }}>
